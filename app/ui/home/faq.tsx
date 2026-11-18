@@ -1,24 +1,24 @@
-import {QuestionMarkCircleIcon} from "@heroicons/react/24/solid";
-import Section from "@/app/ui/container";
+import {Reveal, SectionHeader} from "@/app/ui/deco";
 
-function FAQItem({title, content}: { title: string, content: string }) {
+function FAQItem({index, title, content}: { index: string; title: string; content: string }) {
     return (
-        <div className="mb-10">
-            <h3 className="flex items-center mb-4 text-lg font-medium text-title dark:text-title-dark">
-                <QuestionMarkCircleIcon className="flex-shrink-0 mr-2 w-6 h-6 text-content dark:text-content-dark/80">
-                </QuestionMarkCircleIcon>
+        <div className="group relative border-b border-edge py-6 pl-14 transition-colors hover:bg-panel/60">
+            <span className="absolute left-0 top-6 bg-panel-2 px-2 py-1 text-xs font-black text-signal clip-slant">
+                {index}
+            </span>
+            <h3 className="text-base font-black tracking-wide text-fg sm:text-lg">
                 {title}
             </h3>
-            <p className="text-content dark:text-content-dark">{content}</p>
+            <p className="mt-2 max-w-2xl text-sm leading-7 text-mute">{content}</p>
         </div>
-    )
+    );
 }
 
 export default function FAQ() {
     const faqs = [
         {
             title: "啥玩意？",
-            content: "Reasonable，中文名称禾李团队，日文名称葉李，成立于 2021 年 8 月 14 日，现以 Minecraft 编程与周边资源制作为核心工作，预备转型的综合性团队。致力于打造 Minecraft 优质资源，并努力建设成为一个绿色、开放、共享、平等的团队。"
+            content: "Reasonable，中文名称禾李团队，日文名称葉李，成立于 2021 年 8 月 14 日，现以 Minecraft 编程与周边资源制作为核心工作，预备转型的综合性团队，已注册为禾李（杭州）科技有限责任公司。"
         },
         {
             title: "为什么叫禾李？",
@@ -45,21 +45,29 @@ export default function FAQ() {
             content: "看到顶上十分晃眼的“加入我们”了吗？点一下试试。"
         },
     ]
-    const middle = Math.floor(faqs.length / 2);
-    const first = faqs.slice(0, middle);
-    const second = faqs.slice(middle, faqs.length);
+    const middle = Math.ceil(faqs.length / 2);
+    const columns = [faqs.slice(0, middle), faqs.slice(middle)];
     return (
-        <Section>
-            <div className="relative py-8 mx-auto max-w-screen-xl sm:py-16 px-16">
-                <div className="grid pt-8 text-left md:gap-16 md:grid-cols-2">
-                    <div>
-                        {first.map((faq) => <FAQItem key={faq.title} title={faq.title} content={faq.content}/>)}
-                    </div>
-                    <div>
-                        {second.map((faq) => <FAQItem key={faq.title} title={faq.title} content={faq.content}/>)}
-                    </div>
+        <section className="relative">
+            <div className="mx-auto max-w-screen-xl px-6 py-20 sm:py-24">
+                <Reveal>
+                    <SectionHeader index="02" title="常见问题" en="FAQ"/>
+                </Reveal>
+                <div className="grid gap-x-12 md:grid-cols-2">
+                    {columns.map((column, c) => (
+                        <div key={c} className="border-t border-edge">
+                            {column.map((faq, i) => (
+                                <Reveal key={faq.title} delay={i * 0.06}>
+                                    <FAQItem
+                                        index={String(c * middle + i + 1).padStart(2, '0')}
+                                        title={faq.title}
+                                        content={faq.content}/>
+                                </Reveal>
+                            ))}
+                        </div>
+                    ))}
                 </div>
             </div>
-        </Section>
-    )
+        </section>
+    );
 }

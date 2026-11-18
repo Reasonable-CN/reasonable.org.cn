@@ -1,11 +1,12 @@
 .bn-container[data-color-scheme] {
-    --bn-colors-editor-text: theme('colors.content');
+    --bn-colors-editor-text: #E9ECF1;
     --bn-colors-editor-background: transparent;
-    --bn-font-family: 'LXGW WenKai Lite', sans-serif
+    --bn-font-family: "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", sans-serif;
 }
 
 .bn-container[data-color-scheme='dark'] {
-    --bn-colors-editor-text: theme('colors.content-dark');
+    --bn-colors-editor-text: #E9ECF1;
+    --bn-colors-editor-background: transparent;
 }
 
 .bn-editor {

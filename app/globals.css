@@ -1,35 +1,97 @@
-@import 'lxgw-wenkai-lite-webfont/style.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 237, 249, 255;
-    --background-end-rgb: 255, 255, 255;
+    --base: #0B0D12;
+    --signal: #FFC233;
+    --pulse: #35E0D0;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 17, 24, 39;
-        --background-end-rgb: 24, 34, 56;
-    }
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    color: rgb(var(--foreground-rgb));
-    background: linear-gradient(
-            to bottom,
-            transparent,
-            rgb(var(--background-end-rgb))
-    ) rgb(var(--background-start-rgb));
-    font-family: "LXGW WenKai Lite", sans-serif;
+    color: #E9ECF1;
+    background-color: var(--base);
+    font-family: "DIN Alternate", "Bahnschrift", "PingFang SC", "HarmonyOS Sans SC",
+        "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+    background: var(--signal);
+    color: #0B0D12;
+}
+
+/* 细滚动条，贴合深色界面 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #0B0D12;
+}
+::-webkit-scrollbar-thumb {
+    background: #242B36;
+    border: 2px solid #0B0D12;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #333C4A;
 }
 
 @layer utilities {
     .text-balance {
         text-wrap: balance;
+    }
+
+    /* 蓝图网格背景 */
+    .bg-blueprint {
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 48px 48px;
+    }
+
+    /* 45° 斜纹警示条（纯图形装饰） */
+    .hatch {
+        background-image: repeating-linear-gradient(
+            -45deg,
+            currentColor 0,
+            currentColor 1px,
+            transparent 1px,
+            transparent 7px
+        );
+    }
+
+    /* 斜切角面板 */
+    .clip-corner {
+        clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+    }
+    .clip-corner-sm {
+        clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    }
+
+    /* 平行四边形按钮 */
+    .clip-slant {
+        clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+    }
+
+    /* 描边大字 */
+    .text-outline {
+        -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.22);
+        color: transparent;
+    }
+    .text-outline-signal {
+        -webkit-text-stroke: 1.5px rgba(255, 194, 51, 0.45);
+        color: transparent;
+    }
+}
+
+/* 页面载入与滚动 reveal 的落点（配合 framer-motion 使用，无 JS 时保持可见） */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
     }
 }

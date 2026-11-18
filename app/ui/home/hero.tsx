@@ -1,67 +1,87 @@
 'use client';
+import Link from "next/link";
+import {motion} from "framer-motion";
+import MemberCloud from "@/app/ui/home/member-cloud";
+import {teamMembers} from "@/lib/members";
 
-import Section from "@/app/ui/container";
+const facts = [
+    {label: '成立时间', value: '2021.08'},
+    {label: '团队规模', value: `${teamMembers.length} 名成员`},
+    {label: '核心领域', value: '软件开发与游戏创作'},
+];
+
+const rise = {
+    hidden: {opacity: 0, y: 32},
+    show: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: {duration: 0.7, delay: 0.12 * i, ease: [0.22, 1, 0.36, 1] as const},
+    }),
+};
 
 export default function Hero() {
     return (
-        <Section>
-            <div className="relative isolate px-6 pt-14 lg:px-8">
-                <div
-                    className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-                    aria-hidden="true"
-                >
-                    <div
-                        className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#66ccff] to-[#ff6c6c] dark:to-[#8a3232] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-                        style={{
-                            clipPath:
-                                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                        }}
-                    />
+        <section className="relative overflow-hidden border-b border-edge bg-blueprint">
+            {/* 背景斜切色块 */}
+            <div className="pointer-events-none absolute -right-40 -top-24 h-[420px] w-[720px] rotate-[-8deg] bg-panel-2/80" aria-hidden="true"/>
+            <div className="pointer-events-none absolute -right-24 top-40 h-24 w-[560px] rotate-[-8deg] hatch text-edge" aria-hidden="true"/>
+
+            <div className="relative mx-auto grid max-w-screen-xl gap-10 px-5 pb-12 pt-16 sm:gap-12 sm:px-6 sm:pb-20 sm:pt-32 lg:grid-cols-[1.08fr_1fr] lg:items-center lg:px-10 lg:pb-28 lg:pt-40 xl:px-12">
+                {/* 左：标题区 */}
+                <div>
+                    <motion.div variants={rise} initial="hidden" animate="show" custom={0}
+                                className="mb-6 inline-flex items-center gap-3 border border-edge bg-panel px-3 py-1.5">
+                        <span className="h-2 w-2 animate-pulse bg-signal"/>
+                        <span className="text-xs font-bold tracking-[0.2em] text-mute">禾李（杭州）科技有限责任公司</span>
+                    </motion.div>
+
+                    <motion.h1 variants={rise} initial="hidden" animate="show" custom={1}
+                               className="text-6xl font-black leading-none tracking-tightest text-fg sm:text-8xl">
+                        禾李
+                        <span className="ml-4 text-outline align-top text-4xl font-black sm:text-6xl">TEAM</span>
+                    </motion.h1>
+                    <motion.p variants={rise} initial="hidden" animate="show" custom={2}
+                              className="mt-3 text-3xl font-black tracking-[0.08em] text-outline-signal sm:text-5xl">
+                        REASONABLE
+                    </motion.p>
+
+                    <motion.p variants={rise} initial="hidden" animate="show" custom={3}
+                              className="mt-7 max-w-xl text-[15px] leading-7 text-mute sm:mt-8 sm:text-lg sm:leading-8">
+                        一群 Minecraft 玩家组成的团队，成立于 2021 年。
+                        从方块世界出发，正在转型为综合性创作与开发团队——我们注定要走向更远的地方。
+                    </motion.p>
+
+                    <motion.div variants={rise} initial="hidden" animate="show" custom={4}
+                                className="mt-9 grid w-full grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:mt-10 sm:flex sm:w-auto sm:items-center sm:gap-4">
+                        <Link href="/team"
+                              className="clip-slant flex w-full items-center justify-center bg-signal px-6 py-3.5 text-sm font-black tracking-widest text-ink transition-colors hover:bg-fg sm:w-auto sm:px-8">
+                            认识团队
+                        </Link>
+                        <Link href="/join"
+                              className="clip-slant flex w-full items-center justify-center border border-edge-strong bg-panel px-6 py-3.5 text-sm font-black tracking-widest text-fg transition-colors hover:border-signal hover:text-signal sm:w-auto sm:px-8">
+                            加入我们
+                        </Link>
+                    </motion.div>
                 </div>
-                <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-                    {/*<div className="hidden sm:mb-8 sm:flex sm:justify-center">*/}
-                    {/*    <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">*/}
-                    {/*        Announcing our next round of funding.{' '}*/}
-                    {/*        <a href="#" className="font-semibold text-indigo-600">*/}
-                    {/*            <span className="absolute inset-0" aria-hidden="true" />*/}
-                    {/*            Read more <span aria-hidden="true">&rarr;</span>*/}
-                    {/*        </a>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    <div className="text-center">
-                        <h1 className="text-4xl font-black tracking-tight text-title dark:text-title-dark sm:text-6xl">
-                            We&apos;re <div
-                            className="inline bg-clip-text text-transparent bg-gradient-to-br from-blue-300 to-blue-800 dark:from-blue-100 dark:to-blue-400">Reasonable</div>
-                        </h1>
-                        <p className="mt-6 text-lg leading-8 text-content dark:text-content-dark">
-                            禾李，一群 Minecraft 玩家组成的团队
-                        </p>
-                        {/*<div className="mt-10 flex items-center justify-center gap-x-6">*/}
-                        {/*    <a*/}
-                        {/*        href="#"*/}
-                        {/*        className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"*/}
-                        {/*    >*/}
-                        {/*        Get started*/}
-                        {/*    </a>*/}
-                        {/*    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">*/}
-                        {/*        Learn more <span aria-hidden="true">→</span>*/}
-                        {/*    </a>*/}
-                        {/*</div>*/}
-                    </div>
-                </div>
-                <div
-                    className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-                    aria-hidden="true"
-                >
-                    <div
-                        className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#66ccff] to-[#ff6c6c] dark:to-[#8a3232] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-                        style={{
-                            clipPath:
-                                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                        }}
-                    />
-                </div>
+
+                <MemberCloud/>
             </div>
-        </Section>
-    )
+
+            {/* 底部事实条 */}
+            <motion.div
+                initial={{opacity: 0, y: 20}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 0.7, delay: 0.5}}
+                className="relative border-t border-edge bg-panel/60 backdrop-blur-sm">
+                <div className="mx-auto grid max-w-screen-xl grid-cols-1 divide-y divide-edge sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:px-4 xl:px-6">
+                    {facts.map((fact) => (
+                        <div key={fact.label} className="flex items-baseline justify-between gap-4 px-5 py-4 sm:flex-col sm:items-start sm:gap-1 sm:px-6 sm:py-5">
+                            <span className="text-xs font-bold tracking-[0.25em] text-dim">{fact.label}</span>
+                            <span className="text-right text-base font-black text-fg sm:text-left sm:text-lg">{fact.value}</span>
+                        </div>
+                    ))}
+                </div>
+            </motion.div>
+        </section>
+    );
 }

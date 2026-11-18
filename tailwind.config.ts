@@ -1,5 +1,4 @@
 import type {Config} from "tailwindcss";
-import colors from 'tailwindcss/colors';
 
 const config: Config = {
     content: [
@@ -9,26 +8,41 @@ const config: Config = {
     ],
     theme: {
         extend: {
-            backgroundImage: {
-                "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-                "gradient-conic":
-                    "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-            },
             colors: {
-                'light': colors.white,
-                'midnight': 'rgb(219 234 254 / 0.1)',
-                'dark': colors.gray["900"],
-                'title': colors.gray["900"],
-                'title-dark': colors.gray["100"],
-                'content': colors.gray["500"],
-                'content-dark': colors.gray["300"],
-                'primary': 'rgb(30 58 138 / 0.2)',
-                'primary-dark': 'rgb(147 197 253 / 0.2)',
-                'secondary': 'rgb(30 58 138 / 0.1)',
-                'secondary-dark': 'rgb(219 234 254 / 0.2)',
-                'info': 'rgb(30 64 175 / 0.1)',
-                'info-dark': 'rgb(239 246 255 / 0.2)',
-            }
+                // 基底：近黑的蓝灰，工业深色
+                ink: '#0B0D12',
+                panel: '#12161D',
+                'panel-2': '#171C26',
+                'panel-3': '#1E2530',
+                // 描边
+                edge: 'rgba(255,255,255,0.09)',
+                'edge-strong': 'rgba(255,255,255,0.18)',
+                // 文字
+                fg: '#E9ECF1',
+                mute: '#9AA1AD',
+                dim: '#5C6470',
+                // 信号黄（主 accent）
+                signal: {
+                    DEFAULT: '#FFC233',
+                    soft: 'rgba(255,194,51,0.12)',
+                    deep: '#B98A17',
+                },
+                // 脉冲青（次 accent，少量使用）
+                pulse: {
+                    DEFAULT: '#35E0D0',
+                    soft: 'rgba(53,224,208,0.10)',
+                },
+            },
+            fontFamily: {
+                sans: [
+                    '"DIN Alternate"', '"Bahnschrift"', '"PingFang SC"',
+                    '"HarmonyOS Sans SC"', '"Microsoft YaHei"',
+                    '"Helvetica Neue"', 'Arial', 'sans-serif',
+                ],
+            },
+            letterSpacing: {
+                tightest: '-0.04em',
+            },
         },
     },
     plugins: [

@@ -11,14 +11,6 @@ export default function BlockNote({initialContent, editable = false}: { initialC
     });
 
     return (
-        // <>
-            <BlockNoteView editor={editor} />
-        //     <button role="button" onClick={
-        //         () => {
-        //             console.log(JSON.stringify(editor.topLevelBlocks))
-        //         }
-        //     }>Button
-        //     </button>
-        // </>
+        <BlockNoteView editor={editor} theme="dark"/>
     );
 }
